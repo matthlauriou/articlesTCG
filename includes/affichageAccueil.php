@@ -8,10 +8,7 @@ function derniersArtilcesAccueil($atts){
 		'orderby' => 'date',
 	), $atts) );
 
-    $output= "<head>
-				<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-			</head>
-	<body>
+    $output= "<body>
 	<h2>L'actualité du club</h2>";
 
 	$query = array();
@@ -32,11 +29,11 @@ function derniersArtilcesAccueil($atts){
 		$permalink = get_permalink( $post_id );
 
 		$output = $output ."<figure>
-		<div>
-			<table>
+		<div class='lastPost_overflow lastPost_max_width lastPost_border-radius_15 '>
+			<table class='lastPost_margin_bottom lastPost_w100'>
 				<thead>
 					<tr>
-						<th>
+						<th class='lastPost_text_align_left'>
 							<a href ='{$permalink}' title='{$post_to_show->post_title}' class='lastPost_text_deco_none lastPost_font_size_large'>{$post_to_show->post_title} </a>
 						</th>
 					</tr>
@@ -46,10 +43,10 @@ function derniersArtilcesAccueil($atts){
 		
 		if(has_post_thumbnail($post_id) !=''){
 			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'thumbnail' );
-			$output = $output ."<table>
+			$output = $output ."<table class='lastPost_margin_bottom lastPost_w100'>
 			<tbody>
 				<tr>
-					<td>
+					<td class='lastPost_text_align_center lastPost_w30 '>
 						<img id='thumbnail' src='{$image[0]}' alt='image_thumbnail' class=''/>
 					</td>";
 		}else {
@@ -64,14 +61,14 @@ function derniersArtilcesAccueil($atts){
 				$output = $output ."<table>
 				<tbody>
 					<tr>
-						<td>
+						<td class='lastPost_text_align_center lastPost_w30 '>
 							<img id='thumbnail' src='{$firstImage}' alt='image_thumbnail' class='lastPost_img_size'/>
 						</td>";
 			}else{
 				$output = $output ."<table>
 				<tbody>
 					<tr>
-						<td>
+						<td class='lastPost_text_align_center lastPost_w30 '>
 							<img id='thumbnail' src='{$firstImage[0]}' alt='image_thumbnail' class='lastPost_img_size'/>
 						</td>";
 
@@ -81,7 +78,7 @@ function derniersArtilcesAccueil($atts){
         $content = $post_to_show->post_content;
         $resumerContenu = substr($content, 0, 300);
 		$readMe = plugin_dir_url(dirname(__FILE__)).'img/open-book.png';
-        $output = $output ." <td>{$resumerContenu}...</td>
+        $output = $output ." <td class='lastPost_w70'>{$resumerContenu}...</td>
 						</tr>
 						<tr>
 							<td colspan = 2 class='lastPost_text_align_right'>

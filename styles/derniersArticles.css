@@ -31,14 +31,8 @@
 .lastPost_margin_top {
     margin-top: 30px;
 }
-.lastPost_background-color_grisClair {
-    background-color: #e3e3e5;
-}
 .lastPost_border-radius_15 {
     border-radius: 15px;
-}
-.lastPost_text-color_bleuNuit {
-    color: #1c2230;
 }
 .lastPost_overflow {
     overflow: auto;
