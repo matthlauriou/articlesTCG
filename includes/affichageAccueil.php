@@ -8,7 +8,10 @@ function derniersArtilcesAccueil($atts){
 		'orderby' => 'date',
 	), $atts) );
 
-    $output= "<body>
+    $output= "<head>
+				<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+			</head>
+	<body>
 	<h2>L'actualité du club</h2>";
 
 	$query = array();
@@ -77,12 +80,12 @@ function derniersArtilcesAccueil($atts){
 
         $content = $post_to_show->post_content;
         $resumerContenu = substr($content, 0, 300);
-
+		$readMe = plugin_dir_url(dirname(__FILE__)).'img/open-book.png';
         $output = $output ." <td>{$resumerContenu}...</td>
 						</tr>
 						<tr>
-							<td>
-								<a href =\"window.location.href='{$permalink}';\" class='lastPost_text_deco_none'> En savoir plus</a>
+							<td colspan = 2 class='lastPost_text_align_right'>
+								<a href =\"window.location.href='{$permalink}';\" class='lastPost_text_deco_none'><img src='{$readMe}' alt='readMe' class='lastPost_img_icon_size'/> En savoir plus</a>
 							</td>
 						</tr>
 					</tbody>
@@ -92,7 +95,8 @@ function derniersArtilcesAccueil($atts){
 	}
 
 	$lienTousArticles = '?post_type=post';
-	$output = $output ."<a href = '{$lienTousArticles}' class=''>Voir les articles plus anciens</a>
+	$readAll = plugin_dir_url(dirname(__FILE__)).'img/book.png';
+	$output = $output ."<a href = '{$lienTousArticles}' class=''><img src='{$readAll}' alt='readAll' class='lastPost_img_icon_size'/> Voir les articles plus anciens</a>
 	</body>";
 
     return  $output;
