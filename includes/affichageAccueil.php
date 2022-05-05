@@ -19,10 +19,10 @@ function derniersArtilcesAccueil($atts){
 
 		$output = $output ."<figure>
 		<div class='lastPost_overflow lastPost_max_width lastPost_border-radius_15 '>
-			<table class='lastPost_margin_bottom lastPost_w100'>
+			<table class='lastPost_margin_bottom lastPost_w100 latstPost_responsive_table'>
 				<thead>
 					<tr>
-						<th class='lastPost_text_align_left'>
+						<th>
 							<a href ='{$permalink}' title='{$post->post_title}' class='lastPost_text_deco_none lastPost_font_size_large'>{$post->post_title} </a>
 						</th>
 					</tr>
@@ -31,11 +31,11 @@ function derniersArtilcesAccueil($atts){
 		
 		if(has_post_thumbnail($post_id) !=''){
 			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'thumbnail' );
-			$output = $output ."<table class='lastPost_margin_bottom lastPost_w100'>
+			$output = $output ."<table class='lastPost_margin_bottom lastPost_w100 latstPost_responsive_table'>
 			<tbody>
 				<tr>
 					<td class='lastPost_text_align_center lastPost_w30 '>
-						<img id='thumbnail' src='{$image[0]}' alt='image_thumbnail' class=''/>
+						<img id='thumbnail' src='{$image[0]}' alt='image_thumbnail'/>
 					</td>";
 		}else {
 			$firstImage = '';
@@ -46,14 +46,14 @@ function derniersArtilcesAccueil($atts){
 			if(empty($firstImage)){ 
 				// met en place une image par default si l'article n'en contient pas
 				$firstImage = plugin_dir_url(dirname(__FILE__)).'img/default.jpg';
-				$output = $output ."<table>
+				$output = $output ."<table class='lastPost_margin_bottom lastPost_w100 latstPost_responsive_table'>
 				<tbody>
 					<tr>
 						<td class='lastPost_text_align_center lastPost_w30 '>
 							<img id='thumbnail' src='{$firstImage}' alt='image_thumbnail' class='lastPost_img_size'/>
 						</td>";
 			}else{
-				$output = $output ."<table>
+				$output = $output ."<table class='lastPost_margin_bottom lastPost_w100 latstPost_responsive_table'>
 				<tbody>
 					<tr>
 						<td class='lastPost_text_align_center lastPost_w30 '>
