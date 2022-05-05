@@ -11,21 +11,10 @@ function derniersArtilcesAccueil($atts){
     $output= "<body>
 	<h2>L'actualité du club</h2>";
 
-	$query = array();
+	$posts = get_posts();
 
-	if ( $num )
-		$query[] = 'numberposts=' . $num;
-
-	if ( $order )
-		$query[] = 'order=' . $order;
-
-	if ( $orderby )
-		$query[] = 'orderby=' . $orderby;
-
-	$posts_to_show = get_posts( implode( '&', $query ) );
-
-	foreach ($posts_to_show as $post_to_show) {
-		$post_id = $post_to_show->ID ;
+	foreach ($posts as $post) {
+		$post_id = $post->ID ;
 		$permalink = get_permalink( $post_id );
 
 		$output = $output ."<figure>
@@ -34,12 +23,11 @@ function derniersArtilcesAccueil($atts){
 				<thead>
 					<tr>
 						<th class='lastPost_text_align_left'>
-							<a href ='{$permalink}' title='{$post_to_show->post_title}' class='lastPost_text_deco_none lastPost_font_size_large'>{$post_to_show->post_title} </a>
+							<a href ='{$permalink}' title='{$post->post_title}' class='lastPost_text_deco_none lastPost_font_size_large'>{$post->post_title} </a>
 						</th>
 					</tr>
 				</thead>
-			</table>
-		";
+			</table>";
 		
 		if(has_post_thumbnail($post_id) !=''){
 			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'thumbnail' );
@@ -53,7 +41,7 @@ function derniersArtilcesAccueil($atts){
 			$firstImage = '';
 			ob_start();
 			ob_end_clean();
-			$outputImage = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post_to_show->post_content, $matches);
+			$outputImage = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
 			$firstImage = $matches [1];
 			if(empty($firstImage)){ 
 				// met en place une image par default si l'article n'en contient pas
@@ -75,7 +63,7 @@ function derniersArtilcesAccueil($atts){
 			}
 		}
 
-        $content = $post_to_show->post_content;
+        $content = $post->post_content;
         $resumerContenu = substr($content, 0, 300);
 		$readMe = plugin_dir_url(dirname(__FILE__)).'img/open-book.png';
         $output = $output ." <td class='lastPost_w70'>{$resumerContenu}...</td>
