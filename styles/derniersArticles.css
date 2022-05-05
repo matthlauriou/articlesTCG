@@ -50,3 +50,6 @@
     max-width: 100%;
     height: auto;
 }
+.lastPost_img_size{
+    max-width: 150px;
+}

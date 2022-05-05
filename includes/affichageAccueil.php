@@ -1,6 +1,6 @@
 <?php
-
-function derniers_artilces_accueil($atts){
+	
+function derniersArtilcesAccueil($atts){
 
     extract( shortcode_atts( array(
 		'num' => '5',
@@ -41,7 +41,7 @@ function derniers_artilces_accueil($atts){
 			</table>
 		";
 		
-		if(has_post_thumbnail($post_id)){
+		if(has_post_thumbnail($post_id) !=''){
 			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'thumbnail' );
 			$output = $output ."<table>
 			<tbody>
@@ -49,27 +49,54 @@ function derniers_artilces_accueil($atts){
 					<td>
 						<img id='thumbnail' src='{$image[0]}' alt='image_thumbnail' class=''/>
 					</td>";
+		}else {
+			$firstImage = '';
+			ob_start();
+			ob_end_clean();
+			$outputImage = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post_to_show->post_content, $matches);
+			$firstImage = $matches [1];
+			if(empty($firstImage)){ 
+				// met en place une image par default si l'article n'en contient pas
+				$firstImage = plugin_dir_url(dirname(__FILE__)).'img/default.jpg';
+				$output = $output ."<table>
+				<tbody>
+					<tr>
+						<td>
+							<img id='thumbnail' src='{$firstImage}' alt='image_thumbnail' class='lastPost_img_size'/>
+						</td>";
+			}else{
+				$output = $output ."<table>
+				<tbody>
+					<tr>
+						<td>
+							<img id='thumbnail' src='{$firstImage[0]}' alt='image_thumbnail' class='lastPost_img_size'/>
+						</td>";
+
+			}
 		}
 
         $content = $post_to_show->post_content;
         $resumerContenu = substr($content, 0, 300);
-		
+
         $output = $output ." <td>{$resumerContenu}...</td>
-			</tr>
-			<tr>
-				<td>
-					<a href =\"window.location.href='{$permalink}';\" class='lastPost_text_deco_none'> En savoir plus</a>
-				</td>
-			</tr>
-		</tbody>
-		</table>
-		</div>
-		</figure>
-		</body>";
+						</tr>
+						<tr>
+							<td>
+								<a href =\"window.location.href='{$permalink}';\" class='lastPost_text_deco_none'> En savoir plus</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</figure>";
 	}
+
+	$lienTousArticles = '?post_type=post';
+	$output = $output ."<a href = '{$lienTousArticles}' class=''>Voir les articles plus anciens</a>
+	</body>";
 
     return  $output;
 }
-add_shortcode('derniersArticles','derniers_artilces_accueil');
+add_shortcode('derniersArticles','derniersArtilcesAccueil');
 
 ?>
