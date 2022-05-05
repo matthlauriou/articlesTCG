@@ -1,0 +1,52 @@
+.lastPost_font_size_large{
+ font-size:x-large;
+}
+.lastPost_text_align_center{
+    text-align: center;
+}
+.lastPost_text_align_left{
+    text-align: left;
+}
+.lastPost_text_align_right{
+    text-align: right;
+}
+.lastPost_text_deco_none{
+    text-decoration: none;
+}
+.lastPost_margin_bottom_30{
+    margin-bottom: 30px;
+}
+.lastPost_w30 {
+    width: 30%;
+}
+.lastPost_w70 {
+    width: 70%;
+}
+.lastPost_w100 {
+    width: 100%;
+}
+.lastPost_margin_bottom{
+    margin-bottom: 0px;
+}
+.lastPost_margin_top {
+    margin-top: 30px;
+}
+.lastPost_background-color_grisClair {
+    background-color: #e3e3e5;
+}
+.lastPost_border-radius_15 {
+    border-radius: 15px;
+}
+.lastPost_text-color_bleuNuit {
+    color: #1c2230;
+}
+.lastPost_overflow {
+    overflow: auto;
+}
+.lastPost_max_width {
+    max-width: 100%;
+}
+.lastPost_img_responsive{
+    max-width: 100%;
+    height: auto;
+}
