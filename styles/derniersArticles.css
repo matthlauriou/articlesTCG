@@ -7,6 +7,9 @@
 .lastPost_text_align_right{
     text-align: right;
 }
+.lastPost_text_align_left{
+    text-align: left;
+}
 .lastPost_text_deco_none{
     text-decoration: none;
 }
@@ -22,8 +25,8 @@
 .lastPost_margin_bottom{
     margin-bottom: 0px;
 }
-.lastPost_border-radius_15 {
-    border-radius: 15px;
+.lastPost_border_radius_20 {
+    border-radius: 20px;
 }
 .lastPost_overflow {
     overflow: auto;
@@ -41,6 +44,13 @@
 .lastPost_img_icon_size{
     max-width: 30px;
 }
+.lastPost_backgroundColor_grisClair{
+    background-color: #e3e3e5;
+}
+.lastPost_margin_top{
+    margin-top: 50px;
+}
+
 @media(max-width : 700px){
     .latstPost_responsive_table thead{
         display: block;
