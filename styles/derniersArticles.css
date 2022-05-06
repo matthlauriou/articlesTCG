@@ -53,7 +53,7 @@
 
 @media(max-width : 700px){
     .latstPost_responsive_table thead{
-        display: block;
+        display: block ;
     }
     .latstPost_responsive_table tr{
         display: block;

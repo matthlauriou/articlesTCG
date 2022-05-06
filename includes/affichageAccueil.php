@@ -5,7 +5,15 @@ function derniersArtilcesAccueil(){
     $output= "<body>
 	<h2>L'actualité du club</h2>";
 
-	$posts = get_posts();
+	//récupération des articles selon les critères suivants
+	$args = array(
+		'numberposts' => 5,
+		'orderby' =>'date',
+		'order' => 'DESC',
+		'post_type' =>'post'
+	);
+
+	$posts = get_posts($args);
 	$espaceurTop = '';
     $indiceEspaceur = 0;
 
