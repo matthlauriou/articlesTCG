@@ -12,20 +12,24 @@ function derniersArtilcesAccueil(){
 		'post_type' =>'post'
 	);
 
+	//on récupere tous les posts correspondant aux critères
 	$posts = get_posts($args);
 	$espaceurTop = '';
     $indiceEspaceur = 0;
 
 	// on boucle dans les posts
 	foreach ($posts as $post) {
+		//on récupère l'id du post pour récupérer le lien vers l'article complet
 		$post_id = $post->ID ;
 		$permalink = get_permalink( $post_id );
+		// on recupère le contenu de l'article 
+		$content = $post->post_content;
 
-		// Pas de margin-top sur le premier tableau d'article'
+		// Pas de margin-top sur le premier tableau d'article
 		if($indiceEspaceur > 0) {
 			$espaceurTop = 'lastPost_margin_top';
 		}
-
+		
 		//on affiche le titre de l'article
 		$output = $output ."<figure>
 		<div class='lastPost_overflow lastPost_max_width lastPost_border_radius_20 $espaceurTop'>
@@ -41,6 +45,7 @@ function derniersArtilcesAccueil(){
 		// on verifie si l'article a une 1 image feature
 		if(has_post_thumbnail($post_id) !=''){
 			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'thumbnail' );
+			//si oui on l'affiche
 			$output = $output ."
 			<tbody>
 				<tr>
@@ -52,7 +57,7 @@ function derniersArtilcesAccueil(){
 			$firstImage = '';
 			ob_start();
 			ob_end_clean();
-			$outputImage = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+			$outputImage = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches);
 			$firstImage = $matches [1];
 
 			if(empty($firstImage)){ 
@@ -65,6 +70,7 @@ function derniersArtilcesAccueil(){
 							<img id='thumbnail' src='{$firstImage}' alt='image_thumbnail' class='lastPost_img_size'/>
 						</td>";
 			} else {
+				//on affiche la première image poster dans l'article
 				$output = $output ."
 				<tbody>
 					<tr>
@@ -74,12 +80,14 @@ function derniersArtilcesAccueil(){
 
 			}
 		}
-		// on recupère le contenu de l'article 
-        $content = $post->post_content;
-		// on affiche qu'un resumé du texte
-        $resumerContenu = substr(strip_tags($content), 0, 300);
+		
+		//on retire les images
+		$contetnSansImage = preg_replace('/<img[^>]+./','',$content);
+		//on créer un resumer
+		$resumerContenuSansImage = substr($contetnSansImage, 0, 300);
 		$readMe = plugin_dir_url(dirname(__FILE__)).'img/open-book.png';
-        $output = $output ." <td class='lastPost_w70'>{$resumerContenu}...</td>
+		// on affiche qu'un resumé du texte
+        $output = $output ." <td class='lastPost_w70'>{$resumerContenuSansImage}...</td>
 						</tr>
 						<tr>
 							<td colspan = 2 class='lastPost_text_align_right'>
@@ -91,6 +99,7 @@ function derniersArtilcesAccueil(){
 			</div>
 		</figure>";
 
+		//on incrément l'indice d'espace pour séparer les tableaux 
 		$indiceEspaceur++;
 	}
 	// on redirige vers la page contenant tous les posts
