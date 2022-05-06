@@ -2,7 +2,7 @@
 	
 function derniersArtilcesAccueil(){
 
-    $output= "<h2>L'actualité du club</h2>";
+    $output= "<h2 class='lastPost_text_align_center'>L'actualité du club</h2>";
 
 	//récupération des articles selon les critères suivants
 	$args = array(
@@ -25,15 +25,10 @@ function derniersArtilcesAccueil(){
 		// on recupère le contenu de l'article 
 		$content = $post->post_content;
 
-		// Pas de margin-top sur le premier tableau d'article
-		if($indiceEspaceur > 0) {
-			$espaceurTop = 'lastPost_margin_top';
-		}
-		
 		//on affiche le titre de l'article
 		$output = $output ."<figure>
 		<div class='lastPost_overflow lastPost_max_width lastPost_border_radius_20 $espaceurTop'>
-			<table class=' latstPost_responsive_table'>
+			<table class='lastPost_margin_bottom latstPost_responsive_table'>
 				<thead>
 					<tr>
 						<th colspan = 2 class='lastPost_backgroundColor_grisClair lastPost_text_align_left'>
@@ -49,7 +44,7 @@ function derniersArtilcesAccueil(){
 			$output = $output ."
 			<tbody>
 				<tr>
-					<td class='lastPost_text_align_center lastPost_w30 '>
+					<td class='lastPost_vertical_align lastPost_text_align_center lastPost_w30 '>
 						<img id='thumbnail' src='{$image[0]}' alt='image_thumbnail'/>
 					</td>";
 		} else {
@@ -66,18 +61,17 @@ function derniersArtilcesAccueil(){
 				$output = $output ."
 				<tbody>
 					<tr>
-						<td class='lastPost_text_align_center lastPost_w30 '>
-							<img id='thumbnail' src='{$firstImage}' alt='image_thumbnail' class='lastPost_img_size'/>
+						<td class='lastPost_vertical_align lastPost_text_align_center lastPost_w30 '>
+							<img id='thumbnail' src='{$firstImage}' alt='image_thumbnail' class=' lastPost_img_size'/>
 						</td>";
 			} else {
 				//on affiche la première image poster dans l'article
 				$output = $output ."
 				<tbody>
 					<tr>
-						<td class='lastPost_text_align_center lastPost_w30 '>
-							<img id='thumbnail' src='{$firstImage[0]}' alt='image_thumbnail' class='lastPost_img_size'/>
+						<td class='lastPost_vertical_align lastPost_text_align_center lastPost_w30 '>
+							<img id='thumbnail' src='{$firstImage[0]}' alt='image_thumbnail' class=' lastPost_img_size'/>
 						</td>";
-
 			}
 		}
 		
@@ -87,7 +81,7 @@ function derniersArtilcesAccueil(){
 		$resumerContenuSansImage = substr($contetnSansImage, 0, 300);
 		$readMe = plugin_dir_url(dirname(__FILE__)).'img/open-book.png';
 		// on affiche qu'un resumé du texte
-        $output = $output ." <td class='lastPost_w70'>{$resumerContenuSansImage}...</td>
+        $output = $output ." <td class='lastPost_w70 lastPost_vertical_align'>{$resumerContenuSansImage}...</td>
 						</tr>
 						<tr>
 							<td colspan = 2 class='lastPost_text_align_right'>
@@ -98,14 +92,13 @@ function derniersArtilcesAccueil(){
 				</table>
 			</div>
 		</figure>";
-
-		//on incrément l'indice d'espace pour séparer les tableaux 
-		$indiceEspaceur++;
 	}
 	// on redirige vers la page contenant tous les posts
 	$lienTousArticles = '?post_type=post';
 	$readAll = plugin_dir_url(dirname(__FILE__)).'img/book.png';
-	$output = $output ."<a href = '{$lienTousArticles}' class=''><img src='{$readAll}' alt='readAll' class='lastPost_img_icon_size'/> Voir les articles plus anciens</a>";
+	$output = $output ."<div class='lastPost_a'>
+	<a href = '{$lienTousArticles}'><img src='{$readAll}' alt='readAll' class='lastPost_img_icon_size'/><strong> Voir les articles plus anciens</strong></a>
+	</div>";
 
     return  $output;
 }

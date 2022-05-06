@@ -40,14 +40,27 @@
 .lastPost_img_icon_size{
     max-width: 30px;
 }
+.lastPost_img_position{
+    vertical-align: middle;
+    display: table-cell;
+}
 .lastPost_backgroundColor_grisClair{
     background-color: #e3e3e5;
 }
-.lastPost_margin_top{
-    margin-top: 50px;
+.lastPost_a{
+    margin:0px auto;
+    width: 300px;
+    display: block;
+}
+.lastPost_vertical_align{
+    vertical-align: middle;
+    display: table-cell;
 }
 
 @media(max-width : 700px){
+    .lastPost_responsive_table{
+        margin-bottom: 0px;
+    }
     .latstPost_responsive_table th{
         display: block ;
         margin-bottom: 10px;
@@ -58,6 +71,7 @@
     .latstPost_responsive_table td{
         display: block;
         text-align: left;
+        background-color: none;
     }
     .latstPost_responsive_table td:before{
         content: attr(data-label);
