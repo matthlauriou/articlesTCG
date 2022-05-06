@@ -52,11 +52,11 @@
 }
 
 @media(max-width : 700px){
-    .latstPost_responsive_table thead{
+    .latstPost_responsive_table th{
         display: block ;
+        margin-bottom: 10px;
     }
     .latstPost_responsive_table tr{
-        display: block;
         margin-bottom: 40px;
     }
     .latstPost_responsive_table td{

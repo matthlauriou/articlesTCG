@@ -30,7 +30,7 @@ function derniersArtilcesAccueil(){
 		//on affiche le titre de l'article
 		$output = $output ."<figure>
 		<div class='lastPost_overflow lastPost_max_width lastPost_border_radius_20 $espaceurTop'>
-			<table class='lastPost_margin_bottom lastPost_w100 latstPost_responsive_table'>
+			<table class=' latstPost_responsive_table'>
 				<thead>
 					<tr>
 						<th colspan = 2 class='lastPost_backgroundColor_grisClair lastPost_text_align_left'>
