@@ -17,19 +17,19 @@ function derniersArtilcesAccueil(){
 	$espaceurTop = '';
     $indiceEspaceur = 0;
 
-	// Pas de margin-top sur le premier tableau d'article'
-	if($indiceEspaceur > 0) {
-		$espaceurTop = 'lastPost_margin_top';
-	}
-
 	// on boucle dans les posts
 	foreach ($posts as $post) {
+
 		//on récupère l'id du post pour récupérer le lien vers l'article complet
 		$post_id = $post->ID ;
 		$permalink = get_permalink( $post_id );
 		// on recupère le contenu de l'article 
 		$content = $post->post_content;
-
+		
+		// Pas de margin-top sur le premier tableau d'article'
+		if($indiceEspaceur > 0) {
+			$espaceurTop = 'lastPost_margin_top';
+		}
 		//on affiche le titre de l'article
 		$output = $output ."<figure>
 		<div class='lastPost_overflow lastPost_max_width lastPost_border_radius_20 $espaceurTop'>
@@ -97,7 +97,7 @@ function derniersArtilcesAccueil(){
 				</table>
 			</div>
 		</figure>";
-		
+
 		$indiceEspaceur++;
 	}
 	// on redirige vers la page contenant tous les posts
