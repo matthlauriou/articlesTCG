@@ -2,8 +2,7 @@
 	
 function derniersArtilcesAccueil(){
 
-    $output= "<body>
-	<h2>L'actualité du club</h2>";
+    $output= "<h2>L'actualité du club</h2>";
 
 	//récupération des articles selon les critères suivants
 	$args = array(
@@ -48,7 +47,7 @@ function derniersArtilcesAccueil(){
 					<td class='lastPost_text_align_center lastPost_w30 '>
 						<img id='thumbnail' src='{$image[0]}' alt='image_thumbnail'/>
 					</td>";
-		}else {
+		} else {
 			// on verifie si l'article a au moins une 1 image
 			$firstImage = '';
 			ob_start();
@@ -65,7 +64,7 @@ function derniersArtilcesAccueil(){
 						<td class='lastPost_text_align_center lastPost_w30 '>
 							<img id='thumbnail' src='{$firstImage}' alt='image_thumbnail' class='lastPost_img_size'/>
 						</td>";
-			}else{
+			} else {
 				$output = $output ."
 				<tbody>
 					<tr>
@@ -78,13 +77,13 @@ function derniersArtilcesAccueil(){
 		// on recupère le contenu de l'article 
         $content = $post->post_content;
 		// on affiche qu'un resumé du texte
-        $resumerContenu = substr($content, 0, 300);
+        $resumerContenu = substr(strip_tags($content), 0, 300);
 		$readMe = plugin_dir_url(dirname(__FILE__)).'img/open-book.png';
         $output = $output ." <td class='lastPost_w70'>{$resumerContenu}...</td>
 						</tr>
 						<tr>
 							<td colspan = 2 class='lastPost_text_align_right'>
-								<a href =\"window.location.href='{$permalink}';\" class='lastPost_text_deco_none'><img src='{$readMe}' alt='readMe' class='lastPost_img_icon_size'/> En savoir plus... </a>
+								<a href ='{$permalink}' class='lastPost_text_deco_none'><img src='{$readMe}' alt='readMe' class='lastPost_img_icon_size'/> En savoir plus... </a>
 							</td>
 						</tr>
 					</tbody>
@@ -97,8 +96,7 @@ function derniersArtilcesAccueil(){
 	// on redirige vers la page contenant tous les posts
 	$lienTousArticles = '?post_type=post';
 	$readAll = plugin_dir_url(dirname(__FILE__)).'img/book.png';
-	$output = $output ."<a href = '{$lienTousArticles}' class=''><img src='{$readAll}' alt='readAll' class='lastPost_img_icon_size'/> Voir les articles plus anciens</a>
-	</body>";
+	$output = $output ."<a href = '{$lienTousArticles}' class=''><img src='{$readAll}' alt='readAll' class='lastPost_img_icon_size'/> Voir les articles plus anciens</a>";
 
     return  $output;
 }

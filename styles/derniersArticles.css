@@ -34,11 +34,7 @@
 .lastPost_max_width {
     max-width: 100%;
 }
-.lastPost_img_responsive{
-    max-width: 100%;
-    height: auto;
-}
-.lastPost_img_size{
+.lastPost_img_size {
     max-width: 150px;
 }
 .lastPost_img_icon_size{
